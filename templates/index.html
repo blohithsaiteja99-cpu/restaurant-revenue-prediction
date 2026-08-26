@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Restaurant Revenue AI</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <span class="logo-icon">
+            🍽️
+        </span>
+
+        <span>
+            RevenueAI
+        </span>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        <div class="model-status">
+
+            <span class="status-dot"></span>
+
+            ML Model Online
+
+        </div>
+
+
+        <button
+            type="button"
+            id="themeToggle"
+            class="theme-toggle">
+
+            🌙
+
+        </button>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <div class="hero-badge">
+
+            🤖 MACHINE LEARNING PROJECT
+
+        </div>
+
+
+        <h1>
+
+            Restaurant Monthly
+
+            <span>
+                Revenue Prediction
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Predict your restaurant's estimated monthly
+            revenue using operational, customer and
+            business information.
+
+        </p>
+
+
+        <div class="hero-features">
+
+            <span>
+                ✓ Random Forest
+            </span>
+
+            <span>
+                ✓ Data Driven
+            </span>
+
+            <span>
+                ✓ Real-time Prediction
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN DASHBOARD
+===================================================== -->
+
+<main class="dashboard">
+
+
+    <!-- =================================================
+         LEFT SIDE
+    ================================================== -->
+
+    <section class="input-panel">
+
+
+        <!-- PANEL HEADER -->
+
+        <div class="panel-header">
+
+            <div class="panel-icon">
+
+                🏪
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Restaurant Details
+                </h2>
+
+                <p>
+                    Enter your restaurant information
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form
+            action="/predict"
+            method="POST"
+            id="predictionForm">
+
+
+            <!-- =================================================
+                 BASIC INFORMATION
+            ================================================== -->
+
+            <div class="form-section">
+
+
+                <div class="section-title">
+
+                    <span>
+                        📍
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Basic Information
+                        </h3>
+
+                        <p>
+                            Restaurant location and category
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- CITY -->
+
+                    <div class="input-group">
+
+                        <label for="City">
+
+                            City
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <select
+                            id="City"
+                            name="City"
+                            required>
+
+                            <option value="">
+                                Select City
+                            </option>
+
+
+                            <option
+                                value="Hyderabad"
+                                {% if form_data.get('City') == 'Hyderabad' %}
+                                selected
+                                {% endif %}>
+
+                                Hyderabad
+
+                            </option>
+
+
+                            <option
+                                value="Bengaluru"
+                                {% if form_data.get('City') == 'Bengaluru' %}
+                                selected
+                                {% endif %}>
+
+                                Bengaluru
+
+                            </option>
+
+
+                            <option
+                                value="Chennai"
+                                {% if form_data.get('City') == 'Chennai' %}
+                                selected
+                                {% endif %}>
+
+                                Chennai
+
+                            </option>
+
+
+                            <option
+                                value="Mumbai"
+                                {% if form_data.get('City') == 'Mumbai' %}
+                                selected
+                                {% endif %}>
+
+                                Mumbai
+
+                            </option>
+
+
+                            <option
+                                value="Delhi"
+                                {% if form_data.get('City') == 'Delhi' %}
+                                selected
+                                {% endif %}>
+
+                                Delhi
+
+                            </option>
+
+
+                            <option
+                                value="Pune"
+                                {% if form_data.get('City') == 'Pune' %}
+                                selected
+                                {% endif %}>
+
+                                Pune
+
+                            </option>
+
+
+                            <option
+                                value="Vijayawada"
+                                {% if form_data.get('City') == 'Vijayawada' %}
+                                selected
+                                {% endif %}>
+
+                                Vijayawada
+
+                            </option>
+
+
+                            <option
+                                value="Visakhapatnam"
+                                {% if form_data.get('City') == 'Visakhapatnam' %}
+                                selected
+                                {% endif %}>
+
+                                Visakhapatnam
+
+                            </option>
+
+
+                            <option
+                                value="Kochi"
+                                {% if form_data.get('City') == 'Kochi' %}
+                                selected
+                                {% endif %}>
+
+                                Kochi
+
+                            </option>
+
+
+                            <option
+                                value="Jaipur"
+                                {% if form_data.get('City') == 'Jaipur' %}
+                                selected
+                                {% endif %}>
+
+                                Jaipur
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- CUISINE -->
+
+                    <div class="input-group">
+
+                        <label for="Cuisine_Type">
+
+                            Cuisine Type
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <select
+                            id="Cuisine_Type"
+                            name="Cuisine_Type"
+                            required>
+
+                            <option value="">
+                                Select Cuisine
+                            </option>
+
+
+                            <option
+                                value="South Indian"
+                                {% if form_data.get('Cuisine_Type') == 'South Indian' %}
+                                selected
+                                {% endif %}>
+
+                                South Indian
+
+                            </option>
+
+
+                            <option
+                                value="North Indian"
+                                {% if form_data.get('Cuisine_Type') == 'North Indian' %}
+                                selected
+                                {% endif %}>
+
+                                North Indian
+
+                            </option>
+
+
+                            <option
+                                value="Chinese"
+                                {% if form_data.get('Cuisine_Type') == 'Chinese' %}
+                                selected
+                                {% endif %}>
+
+                                Chinese
+
+                            </option>
+
+
+                            <option
+                                value="Italian"
+                                {% if form_data.get('Cuisine_Type') == 'Italian' %}
+                                selected
+                                {% endif %}>
+
+                                Italian
+
+                            </option>
+
+
+                            <option
+                                value="Continental"
+                                {% if form_data.get('Cuisine_Type') == 'Continental' %}
+                                selected
+                                {% endif %}>
+
+                                Continental
+
+                            </option>
+
+
+                            <option
+                                value="Fast Food"
+                                {% if form_data.get('Cuisine_Type') == 'Fast Food' %}
+                                selected
+                                {% endif %}>
+
+                                Fast Food
+
+                            </option>
+
+
+                            <option
+                                value="Cafe"
+                                {% if form_data.get('Cuisine_Type') == 'Cafe' %}
+                                selected
+                                {% endif %}>
+
+                                Cafe
+
+                            </option>
+
+
+                            <option
+                                value="Bakery"
+                                {% if form_data.get('Cuisine_Type') == 'Bakery' %}
+                                selected
+                                {% endif %}>
+
+                                Bakery
+
+                            </option>
+
+
+                            <option
+                                value="Mexican"
+                                {% if form_data.get('Cuisine_Type') == 'Mexican' %}
+                                selected
+                                {% endif %}>
+
+                                Mexican
+
+                            </option>
+
+
+                            <option
+                                value="Biryani"
+                                {% if form_data.get('Cuisine_Type') == 'Biryani' %}
+                                selected
+                                {% endif %}>
+
+                                Biryani
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- SEATING CAPACITY -->
+
+                    <div class="input-group">
+
+                        <label for="Seating_Capacity">
+
+                            Seating Capacity
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                🪑
+                            </span>
+
+
+                            <input
+                                type="number"
+                                id="Seating_Capacity"
+                                name="Seating_Capacity"
+                                value="{{ form_data.get('Seating_Capacity', '') }}"
+                                placeholder="Example: 150"
+                                min="1"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- RESTAURANT AGE -->
+
+                    <div class="input-group">
+
+                        <label for="Restaurant_Age">
+
+                            Restaurant Age
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                📅
+                            </span>
+
+
+                            <input
+                                type="number"
+                                id="Restaurant_Age"
+                                name="Restaurant_Age"
+                                value="{{ form_data.get('Restaurant_Age', '') }}"
+                                placeholder="Years"
+                                min="0"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CUSTOMER & SALES
+            ================================================== -->
+
+            <div class="form-section">
+
+
+                <div class="section-title">
+
+                    <span>
+                        👥
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Customer & Sales
+                        </h3>
+
+                        <p>
+                            Customer traffic and pricing information
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- MEAL PRICE -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Average Meal Price
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                ₹
+                            </span>
+
+
+                            <input
+                                type="number"
+                                name="Average_Meal_Price"
+                                value="{{ form_data.get('Average_Meal_Price', '') }}"
+                                placeholder="Example: 500"
+                                min="1"
+                                step="0.01"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DAILY CUSTOMERS -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Daily Customers
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                👤
+                            </span>
+
+
+                            <input
+                                type="number"
+                                name="Daily_Customers"
+                                value="{{ form_data.get('Daily_Customers', '') }}"
+                                placeholder="Example: 250"
+                                min="1"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- WEEKEND CUSTOMERS -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Weekend Customers
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                📈
+                            </span>
+
+
+                            <input
+                                type="number"
+                                name="Weekend_Customers"
+                                value="{{ form_data.get('Weekend_Customers', '') }}"
+                                placeholder="Example: 500"
+                                min="0"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ONLINE RATING -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Online Rating
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="rating-wrapper">
+
+                            <input
+                                type="number"
+                                name="Online_Rating"
+                                value="{{ form_data.get('Online_Rating', '') }}"
+                                placeholder="4.3"
+                                min="1"
+                                max="5"
+                                step="0.1"
+                                required>
+
+
+                            <span>
+                                ⭐ / 5
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CUSTOMER SATISFACTION -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Customer Satisfaction
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="rating-wrapper">
+
+                            <input
+                                type="number"
+                                name="Customer_Satisfaction"
+                                value="{{ form_data.get('Customer_Satisfaction', '') }}"
+                                placeholder="8.5"
+                                min="1"
+                                max="10"
+                                step="0.1"
+                                required>
+
+
+                            <span>
+                                ❤️ / 10
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 OPERATIONS
+            ================================================== -->
+
+            <div class="form-section">
+
+
+                <div class="section-title">
+
+                    <span>
+                        ⚙️
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Restaurant Operations
+                        </h3>
+
+                        <p>
+                            Staffing, expenses and working hours
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- STAFF -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Staff Count
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            name="Staff_Count"
+                            value="{{ form_data.get('Staff_Count', '') }}"
+                            placeholder="Example: 20"
+                            min="1"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EXPERIENCE -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Employee Experience
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            name="Employee_Experience"
+                            value="{{ form_data.get('Employee_Experience', '') }}"
+                            placeholder="Years"
+                            min="0"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- HOURS -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Operating Hours
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            name="Operating_Hours"
+                            value="{{ form_data.get('Operating_Hours', '') }}"
+                            placeholder="Example: 12"
+                            min="1"
+                            max="24"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- COMPETITORS -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Nearby Competitors
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            name="Nearby_Competitors"
+                            value="{{ form_data.get('Nearby_Competitors', '') }}"
+                            placeholder="Example: 5"
+                            min="0"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EXPENSES -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Monthly Expenses
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                ₹
+                            </span>
+
+
+                            <input
+                                type="number"
+                                name="Monthly_Expenses"
+                                value="{{ form_data.get('Monthly_Expenses', '') }}"
+                                placeholder="Example: 1000000"
+                                min="0"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- MARKETING -->
+
+                    <div class="input-group">
+
+                        <label>
+
+                            Marketing Budget
+
+                            <span class="required">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span>
+                                ₹
+                            </span>
+
+
+                            <input
+                                type="number"
+                                name="Marketing_Budget"
+                                value="{{ form_data.get('Marketing_Budget', '') }}"
+                                placeholder="Example: 100000"
+                                min="0"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SERVICES
+            ================================================== -->
+
+            <div class="form-section">
+
+
+                <div class="section-title">
+
+                    <span>
+                        ⭐
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Services & Facilities
+                        </h3>
+
+                        <p>
+                            Additional restaurant facilities
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Delivery Service
+                        </label>
+
+
+                        <select name="Delivery_Service">
+
+
+                            <option
+                                value="Yes"
+                                {% if form_data.get('Delivery_Service', 'Yes') == 'Yes' %}
+                                selected
+                                {% endif %}>
+
+                                Yes
+
+                            </option>
+
+
+                            <option
+                                value="No"
+                                {% if form_data.get('Delivery_Service') == 'No' %}
+                                selected
+                                {% endif %}>
+
+                                No
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- PARKING -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Parking Available
+                        </label>
+
+
+                        <select name="Parking_Available">
+
+
+                            <option
+                                value="Yes"
+                                {% if form_data.get('Parking_Available', 'Yes') == 'Yes' %}
+                                selected
+                                {% endif %}>
+
+                                Yes
+
+                            </option>
+
+
+                            <option
+                                value="No"
+                                {% if form_data.get('Parking_Available') == 'No' %}
+                                selected
+                                {% endif %}>
+
+                                No
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- FESTIVAL -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Festival Discount
+                        </label>
+
+
+                        <select name="Festival_Discount">
+
+
+                            <option
+                                value="Yes"
+                                {% if form_data.get('Festival_Discount', 'Yes') == 'Yes' %}
+                                selected
+                                {% endif %}>
+
+                                Yes
+
+                            </option>
+
+
+                            <option
+                                value="No"
+                                {% if form_data.get('Festival_Discount') == 'No' %}
+                                selected
+                                {% endif %}>
+
+                                No
+
+                            </option>
+
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BUTTONS
+            ================================================== -->
+
+            <div class="form-buttons">
+
+
+                <button
+                    type="reset"
+                    class="reset-button"
+                    id="resetButton">
+
+                    ↻ Reset
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="predict-button"
+                    id="predictButton">
+
+                    <span>
+                        🔮
+                    </span>
+
+                    Predict Monthly Revenue
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RIGHT SIDE - OUTPUT
+    ================================================== -->
+
+    <section class="output-panel">
+
+
+        <div class="panel-header">
+
+            <div class="panel-icon output-icon">
+
+                📊
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Prediction Result
+                </h2>
+
+                <p>
+                    Machine learning prediction
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        {% if prediction %}
+
+
+        <!-- =================================================
+             REVENUE RESULT
+        ================================================== -->
+
+        <div class="prediction-card">
+
+
+            <div class="prediction-icon">
+
+                💰
+
+            </div>
+
+
+            <div class="prediction-label">
+
+                ESTIMATED MONTHLY REVENUE
+
+            </div>
+
+
+            <div class="prediction-value">
+
+                {{ prediction }}
+
+            </div>
+
+
+            <div class="prediction-divider"></div>
+
+
+            <p class="prediction-description">
+
+                Based on the restaurant information
+                entered, the Random Forest model estimates
+                the above monthly revenue.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             MODEL INFORMATION
+        ================================================== -->
+
+        <div class="model-card">
+
+
+            <div class="model-title">
+
+                <span>
+                    🤖
+                </span>
+
+                <strong>
+                    Model Information
+                </strong>
+
+            </div>
+
+
+            <div class="model-grid">
+
+
+                <div class="model-item">
+
+                    <small>
+                        Algorithm
+                    </small>
+
+                    <strong>
+                        Random Forest
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <small>
+                        ML Type
+                    </small>
+
+                    <strong>
+                        Regression
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <small>
+                        Target
+                    </small>
+
+                    <strong>
+                        Monthly Revenue
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <small>
+                        Dataset
+                    </small>
+
+                    <strong>
+                        2000 Records
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BUSINESS INSIGHT
+        ================================================== -->
+
+        <div class="business-insight">
+
+
+            <div class="insight-heading">
+
+                💡
+
+                <strong>
+                    Business Insight
+                </strong>
+
+            </div>
+
+
+            <p>
+
+                This prediction can help restaurant
+                owners estimate revenue, plan marketing
+                expenditure, manage operating costs and
+                make data-driven business decisions.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ACTION BUTTONS
+        ================================================== -->
+
+        <div class="result-actions">
+
+
+            <button
+                type="button"
+                onclick="window.print()"
+                class="secondary-button">
+
+                🖨️ Print Result
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="scrollToForm()"
+                class="secondary-button">
+
+                ✏️ Modify Inputs
+
+            </button>
+
+        </div>
+
+
+
+        {% else %}
+
+
+        <!-- =================================================
+             EMPTY RESULT
+        ================================================== -->
+
+        <div class="empty-result">
+
+
+            <div class="empty-icon">
+
+                🔮
+
+            </div>
+
+
+            <h2>
+                Ready to Predict
+            </h2>
+
+
+            <p>
+
+                Enter your restaurant information
+                on the left and click
+
+                <strong>
+                    Predict Monthly Revenue
+                </strong>
+
+                to generate the prediction.
+
+            </p>
+
+
+            <div class="prediction-steps">
+
+
+                <div class="step">
+
+                    <span>
+                        1
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Enter Data
+                        </strong>
+
+                        <small>
+                            Provide restaurant details
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <span>
+                        2
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Run Model
+                        </strong>
+
+                        <small>
+                            Random Forest processes inputs
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <span>
+                        3
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Get Prediction
+                        </strong>
+
+                        <small>
+                            View estimated revenue
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% endif %}
+
+
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
+
+        {% if error %}
+
+        <div class="error-box">
+
+            <strong>
+                ⚠️ Prediction Error
+            </strong>
+
+            <p>
+                {{ error }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        🍽️ RevenueAI
+
+    </div>
+
+
+    <p>
+
+        Restaurant Monthly Revenue Prediction System
+
+    </p>
+
+
+    <small>
+
+        Powered by Machine Learning • Random Forest Regression
+
+    </small>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script
+    src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+
+</body>
+
+</html>
